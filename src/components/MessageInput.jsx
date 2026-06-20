@@ -47,13 +47,31 @@ export default function MessageInput({
     };
   }, []);
 
+  useEffect(() => {
+    if (!textareaRef.current) return;
+
+    textareaRef.current.style.height =
+      "auto";
+
+    textareaRef.current.style.height =
+      Math.min(
+        textareaRef.current.scrollHeight,
+        160
+      ) + "px";
+  }, [text]);
+
   const handleSend = () => {
     if (!text.trim()) return;
 
     sendMessage(text);
+
     setText("");
 
-    textareaRef.current?.focus();
+    if (textareaRef.current) {
+      textareaRef.current.style.height =
+        "auto";
+      textareaRef.current.focus();
+    }
   };
 
   const handleKeyDown = (e) => {
@@ -81,15 +99,15 @@ export default function MessageInput({
         {replyTo && (
           <div
             className="
-            mb-4
-            flex items-start justify-between
-            rounded-3xl
-            border border-white/10
-            bg-white/10
-            p-4
-            backdrop-blur-2xl
-            shadow-xl
-          "
+              mb-4
+              flex items-start justify-between
+              rounded-3xl
+              border border-white/10
+              bg-white/10
+              p-4
+              backdrop-blur-2xl
+              shadow-xl
+            "
           >
             <div className="overflow-hidden">
               <p className="text-sm font-semibold text-cyan-300">
@@ -112,51 +130,18 @@ export default function MessageInput({
           </div>
         )}
 
-        {/* Main Input */}
+        {/* Input Container */}
         <div
           className="
-          relative
-          flex items-end gap-4
-          rounded-[32px]
-          border border-white/10
-          bg-white/10
-          p-4
-          backdrop-blur-3xl
-          shadow-2xl
-        "
+            rounded-[32px]
+            border border-white/10
+            bg-white/10
+            backdrop-blur-3xl
+            shadow-2xl
+            px-5
+            py-4
+          "
         >
-          {/* Emoji Button */}
-          <div
-            className="relative"
-            ref={emojiPickerRef}
-          >
-            <button
-              onClick={() =>
-                setShowEmojiPicker(
-                  (prev) => !prev
-                )
-              }
-              className="
-                text-gray-300
-                transition
-                hover:text-yellow-400
-              "
-            >
-              <FaSmile size={22} />
-            </button>
-
-            {showEmojiPicker && (
-              <div className="absolute bottom-14 left-0 z-50">
-                <EmojiPicker
-                  theme="dark"
-                  onEmojiClick={
-                    handleEmojiClick
-                  }
-                />
-              </div>
-            )}
-          </div>
-
           {/* Textarea */}
           <textarea
             ref={textareaRef}
@@ -167,42 +152,80 @@ export default function MessageInput({
             }
             onKeyDown={handleKeyDown}
             placeholder="Type a message..."
-            aria-label="Message input"
             className="
-              flex-1
+              w-full
               resize-none
+              overflow-y-auto
               bg-transparent
               text-gray-100
               placeholder:text-gray-400
               caret-cyan-400
               outline-none
+              text-lg
+              leading-7
+              max-h-40
             "
           />
 
-          {/* Send Button */}
-          <button
-            onClick={handleSend}
-            aria-label="Send message"
-            className="
-              flex
-              h-12
-              w-12
-              items-center
-              justify-center
-              rounded-full
-              bg-gradient-to-r
-              from-blue-500
-              to-indigo-600
-              text-white
-              shadow-xl
-              transition-all
-              duration-300
-              hover:scale-110
-              hover:shadow-blue-500/40
-            "
-          >
-            <FaPaperPlane size={14} />
-          </button>
+          {/* Bottom Toolbar */}
+          <div className="mt-4 flex items-center justify-end gap-2">
+            {/* Emoji Button */}
+            <div
+              className="relative"
+              ref={emojiPickerRef}
+            >
+              <button
+                onClick={() =>
+                  setShowEmojiPicker(
+                    (prev) => !prev
+                  )
+                }
+                className="
+                  flex h-10 w-10
+                  items-center justify-center
+                  rounded-full
+                  text-gray-400
+                  transition
+                  hover:bg-white/10
+                  hover:text-yellow-400
+                "
+              >
+                <FaSmile size={18} />
+              </button>
+
+              {showEmojiPicker && (
+                <div className="absolute bottom-14 right-0 z-50">
+                  <EmojiPicker
+                    theme="dark"
+                    onEmojiClick={
+                      handleEmojiClick
+                    }
+                  />
+                </div>
+              )}
+            </div>
+
+            {/* Send Button */}
+            <button
+              onClick={handleSend}
+              className="
+                flex h-12 w-12
+                items-center justify-center
+                rounded-full
+                bg-gradient-to-r
+                from-blue-500
+                to-indigo-600
+                text-white
+                shadow-xl
+                transition-all
+                duration-300
+                hover:scale-105
+                hover:shadow-blue-500/40
+              "
+            >
+              <FaPaperPlane size={14} />
+            </button>
+          </div>
         </div>
       </div>
     </div>
