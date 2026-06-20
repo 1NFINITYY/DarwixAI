@@ -3,6 +3,13 @@
 ## Live Demo
 🚀 **[View Live Demo Here](https://darwix-ai-three.vercel.app/)**
 *(Deployed effortlessly using Vercel)*
+<img width="1916" height="912" alt="Screenshot 2026-06-20 170949" src="https://github.com/user-attachments/assets/e57ce64e-a634-430a-a73c-00361d761770" />
+<img width="1917" height="905" alt="Screenshot 2026-06-20 171111" src="https://github.com/user-attachments/assets/a1268055-5df7-4edb-972d-9dde7590bacb" />
+<img width="1358" height="620" alt="Screenshot 2026-06-20 171157" src="https://github.com/user-attachments/assets/2f4fce4c-706b-4ac8-a799-708ad38c0d0e" />
+<img width="1366" height="739" alt="Screenshot 2026-06-20 171217" src="https://github.com/user-attachments/assets/090baec9-f579-43c8-8b1d-a10a31170461" />
+<img width="1314" height="370" alt="Screenshot 2026-06-20 171250" src="https://github.com/user-attachments/assets/81501570-16e9-4a9a-877d-c0ab9deb5301" />
+<img width="655" height="422" alt="Screenshot 2026-06-20 171046" src="https://github.com/user-attachments/assets/de404a47-94d2-4a5c-8e73-e9f1d70ef11c" />
+
 
 ## Project Overview
 
