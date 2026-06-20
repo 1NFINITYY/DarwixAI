@@ -1,5 +1,9 @@
 # DarwixAI - Intelligent Chat Assistant
 
+## Live Demo
+🚀 **[View Live Demo Here](https://darwix-ai-three.vercel.app/)**
+*(Deployed effortlessly using Vercel)*
+
 ## Project Overview
 
 DarwixAI is a highly scalable, modern, responsive, and aesthetically pleasing chat assistant application built to provide a seamless conversational experience. The project serves as a dynamic user interface for a conversational AI, solving the problem of creating an intuitive and visually engaging platform for user-bot interactions. 
@@ -63,89 +67,12 @@ src/
 
 ## Components Documentation
 
-### `App` (`src/App.jsx`)
-- **Purpose:** The root container component that manages the core application state and layout.
-- **Props received:** None.
-- **State used:** 
-  - `messages`: Array of message objects, initialized from `localStorage`.
-  - `typing`: Boolean indicating if the bot is currently typing.
-  - `replyTo`: Object storing the message currently being replied to (or null).
-- **Functions inside:**
-  - `sendMessage(text)`: Handles user input, creates a new user message, clears the reply state, simulates a bot typing delay, and then generates a simulated bot response (with an intentional failure rate for demonstration).
-  - `retryMessage(id)`: Allows users to retry a bot message that previously failed to generate.
-  - `deleteMessage(id)`: Removes a specific message from the state array.
-- **Interaction:** Passes state and functions down as props to `Header`, `ChatArea`, and `MessageInput`.
-
-### `ChatArea` (`src/components/ChatArea.jsx`)
-- **Purpose:** Renders the scrollable list of messages efficiently.
-- **Props received:** `messages`, `typing`, `retryMessage`, `deleteMessage`, `onReply`.
-- **State used:** `useRef` for the Virtuoso list instance. `useMemo` to combine `messages` and the `typing` indicator into a single renderable list.
-- **Functions inside:** Uses `useEffect` to automatically scroll to the bottom of the list whenever new data is added.
-- **Interaction:** Uses the `Virtuoso` component for virtualized rendering. Maps over the data to render either a `Message` component or a `TypingIndicator`.
-- **UI Behavior:** Ensures smooth scrolling and prevents performance degradation when the chat history grows large.
-
-### `Header` (`src/components/Header.jsx`)
-- **Purpose:** Displays the application title and the bot's current status.
-- **Props received:** None.
-- **State used:** None.
-- **Interaction:** Pure presentational component rendered at the top of `App`.
-- **UI Behavior:** Features a pulsating green "Online" indicator and a glassmorphism container design.
-
-### `Message` (`src/components/Message.jsx`)
-- **Purpose:** Represents an individual chat bubble for either the user or the bot.
-- **Props received:** `message` (object), `retryMessage`, `deleteMessage`, `onReply`.
-- **State used:** 
-  - `copied`: Boolean for the copy feedback state.
-  - `showMenu`: Boolean controlling the visibility of the action dropdown menu.
-  - `showInfo`: Boolean controlling the visibility of the message info modal.
-  - `menuPosition`: Object storing top/left coordinates for the dropdown menu.
-- **Functions inside:**
-  - `handleCopy()`: Uses the Clipboard API to copy the message text.
-  - `handleMenuToggle()`: Calculates the absolute positioning for the dropdown menu relative to the button clicked, preventing off-screen rendering.
-  - `useEffect`: Listens for outside clicks to close the dropdown menu.
-- **Interaction:** Renders user messages on the right and bot messages on the left. Displays a reply preview if the message is a reply. Employs `createPortal` to render dropdowns and modals at the document body level to avoid z-index clipping issues.
-
-### `MessageInput` (`src/components/MessageInput.jsx`)
-- **Purpose:** The text input area where users compose and send messages.
-- **Props received:** `sendMessage`, `replyTo`, `setReplyTo`.
-- **State used:**
-  - `text`: String containing the current input value.
-  - `showEmojiPicker`: Boolean controlling the visibility of the emoji picker.
-- **Functions inside:**
-  - `handleSend()`: Validates input, calls `sendMessage`, and resets the textarea.
-  - `handleKeyDown(e)`: Allows sending the message by pressing the `Enter` key (without shift).
-  - `handleEmojiClick(emojiData)`: Appends the selected emoji to the current text.
-  - `useEffect`: Manages the auto-resizing of the textarea based on its `scrollHeight` and closes the emoji picker on outside clicks.
-- **Interaction:** Displays a "Replying to" banner if `replyTo` is populated. Connects to `EmojiPicker` for emoji integration.
-
-### `TypingIndicator` (`src/components/TypingIndicator.jsx`)
-- **Purpose:** Displays an animated visual cue that the bot is processing a response.
-- **Props received:** None.
-- **State used:** None.
-- **UI Behavior:** Renders three bouncing dots with staggered animation delays, styled consistently with bot message bubbles.
-
-## Functions Documentation
-
-### `sendMessage(text)` (in `App.jsx`)
-- **Purpose:** Core logic for dispatching user messages and handling bot replies.
-- **Parameters:** `text` (String) - The content of the user's message.
-- **Return values:** None.
-- **Side effects:** Updates `messages` state with the user's message, resets `replyTo`, toggles `typing` state, sets a timeout, and eventually updates `messages` again with the bot's response.
-- **Where it is used:** Passed down to and called by `MessageInput.jsx` when the user clicks send or presses Enter.
-
-### `handleMenuToggle()` (in `Message.jsx`)
-- **Purpose:** Calculates the exact coordinates to render the message action menu so it stays within the viewport.
-- **Parameters:** None.
-- **Return values:** None.
-- **Side effects:** Updates the `menuPosition` and toggles `showMenu` state.
-- **Where it is used:** Attached to the `onClick` event of the three-dots button on each message bubble.
-
-### `handleEmojiClick(emojiData)` (in `MessageInput.jsx`)
-- **Purpose:** Appends a selected emoji to the current message input.
-- **Parameters:** `emojiData` (Object) - The data payload provided by the `emoji-picker-react` library.
-- **Return values:** None.
-- **Side effects:** Updates the `text` state by concatenating the emoji.
-- **Where it is used:** Passed as the `onEmojiClick` prop to the `EmojiPicker` component.
+- **`App`**: The root container managing core application state (`messages`, `typing`, `replyTo`) and handling message sending logic.
+- **`ChatArea`**: Renders the scrollable message list efficiently using `react-virtuoso` for virtualization. Automatically scrolls to the newest messages.
+- **`Header`**: A presentation component displaying the application title and the bot's "Online" status.
+- **`Message`**: Represents individual chat bubbles. Handles copy-to-clipboard functionality and action menu positioning.
+- **`MessageInput`**: The text input area featuring auto-resize functionality, reply context banners, and emoji picker integration.
+- **`TypingIndicator`**: Displays animated visual cues when the bot is processing a response.
 
 ## State Management
 
