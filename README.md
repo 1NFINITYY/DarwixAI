@@ -116,7 +116,7 @@ Follow these steps to run the project locally:
 
 ### Clone repository
 ```bash
-git clone <repository-url>
+git clone https://github.com/1NFINITYY/DarwixAI.git
 ```
 
 ### Install dependencies
